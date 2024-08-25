@@ -66,8 +66,8 @@
 
 1. Repository is continuously monitored by ArgoCD to keep cluster state up to date. ArgoCD is configured to monitor all directories `*\envs\{env_name}` for specific env.
 2. Everyting is managed by Kustomize, cause:
-  - Kustomize allows to work on top of Helm Charts, Kuztomization configuration, and plain Kubernetes manifests
-  - Kustomize can be used out of the box. With Kustomize you can simply deploy changes locally as well as with ArgoCD or FluxCD, etc.
+   - Kustomize allows to work on top of Helm Charts, Kuztomization configuration, and plain Kubernetes manifests
+   - Kustomize can be used out of the box. With Kustomize you can simply deploy changes locally as well as with ArgoCD or FluxCD, etc.
 3. Promotion between envs is done by operations on files/directories or configuring `envs/{env_name}/kustomization.yaml` files
 4. By design branches are not used to promote changes
 5. You can use branches as an additional point of privileges control and changes verification
@@ -77,10 +77,10 @@
    - force running automatic code validation, checking required policies, and running other quality/security scans
    - allow direct commits by authorized bots/mechanisms
 8. Direct commits by authorized bots/mechanisms:
-  - should be done only when other options are not possible or cannot be done without adding complexity
-  - should change only PRODUCTION configuration (to minimalize the risk of conflicts)
-  - changes should be merged to "default" as soon as possible (e.g. using the cron mechanism to check if changes were done, then merge to "default" branch or alert about conflicts)
-  - example: deploy pipeline changes image version on PRODUCTION branch for specific application to trigger ArgoCD Sync operation
+   - should be done only when other options are not possible or cannot be done without adding complexity
+   - should change only PRODUCTION configuration (to minimalize the risk of conflicts)
+   - changes should be merged to "default" as soon as possible (e.g. using the cron mechanism to check if changes were done, then merge to "default" branch or alert about conflicts)
+   - example: deploy pipeline changes image version on PRODUCTION branch for specific application to trigger ArgoCD Sync operation
 9. Direct committing to the "default" branch should be blocked (PR with all checks and review required) or at least verified with automated steps
 10. Deploy to the PRODUCTION branch(es) is possible only from the "default" branch (all commits must be merged to the "default" branch first)
 11. Changes regarding PROD environments must be labeled “PRODUCTION” in PRs during merging to develop. It should protect against merging to the "default" branch commits changing PRODUCTION that are not yet ready to be deployed to PRODUCTION   
