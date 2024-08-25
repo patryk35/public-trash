@@ -116,7 +116,7 @@
 ### Quality check [TODO]
 
 1. Kubernetes Linter
-2. Other tools -> Is it a JIRA ticket for this ????
+2. Other tools
 
 ### Security check [TODO]
 
