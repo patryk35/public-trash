@@ -72,17 +72,21 @@
    - block direct user commits and force PR review
    - force running automatic code validation, checking required policies and running other quality/security scans
    - allow direct commits by authorized bots/mechanisms
-6. 
+6. Direct commits by authorized bots/mechanisms:
+  - should be done only when other options are not possible or cannot be done without adding complexity
+  - should change only PRODUCTION configuration (to minimalize the risk of conflicts)
+  - changes should be merged to "default" as soon as possible (e.g. using the cron mechanism to check if changes were done, then merge to "default" branch or alert about conflicts)
+  - example: deploy pipeline changes image version on PRODUCTION branch for specific application to trigger ArgoCD Sync operation
 
 
 ### Branching model
 
 1. Use only 2 branches `master` and `develop`. 
-  - `master` -> only PROD configuration
-  - `develop` -> only NON-PROD configuration
-2. (alternative option for addons) Use a single branch for all projects NON-PROD envs and separate branches for each project PRODUCTION env
-  - `develop` or `master` ->  only NON-PROD configuration
-  - `release/{project_name}` -> PROD configuration for specific {project_name}
+  - `master` -> protected branch, changes affect only on PRODUCTION environments
+  - `develop` -> default branch, changes affect only on NON-PRODUCTION environments
+2. (alternative option for addons) Use a single branch for all projects NON-PRODUCTION envs and separate branches for each project PRODUCTION env
+  - `develop` or `master` ->  default branch, changes affect only on NON-PRODUCTION environments
+  - `release/{project_name}` -> protected branch, changes affect only on PRODUCTION environments for specific project
 
 ## Changes promotion procedure
 
